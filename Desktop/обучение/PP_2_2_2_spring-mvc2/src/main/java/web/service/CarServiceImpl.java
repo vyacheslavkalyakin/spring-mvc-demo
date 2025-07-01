@@ -1,6 +1,6 @@
 package web.service;
 
-import web.dao.DaoCarList;
+import web.dao.CarDao;
 import web.model.CarModel;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,9 @@ import java.util.List;
 
 @Service
 public class CarServiceImpl implements CarService {
-    private final DaoCarList daoCarList;
+    private final CarDao daoCarList;
 
-    public CarServiceImpl(DaoCarList daoCarList) {
+    public CarServiceImpl(CarDao daoCarList) {
         this.daoCarList = daoCarList;
     }
 

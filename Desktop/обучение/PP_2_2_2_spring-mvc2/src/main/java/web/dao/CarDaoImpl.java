@@ -5,7 +5,7 @@ import web.model.CarModel;
 import java.util.List;
 
 @Repository
-public class DaoCarListImpl implements DaoCarList {
+public class CarDaoImpl implements CarDao {
 
         private final List<CarModel> cars = List.of(
                 new CarModel(1, "Toyota", "green"),
