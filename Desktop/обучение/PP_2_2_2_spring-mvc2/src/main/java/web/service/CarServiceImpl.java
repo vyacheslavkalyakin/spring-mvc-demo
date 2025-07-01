@@ -1,26 +1,31 @@
 package web.service;
 
+import web.dao.DaoCarList;
 import web.model.CarModel;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class CarServiceImpl implements CarService {
+    private final DaoCarList daoCarList;
+
+    public CarServiceImpl(DaoCarList daoCarList) {
+        this.daoCarList = daoCarList;
+    }
 
     @Override
-    public List<CarModel> getCars( int count) {
-        List<CarModel> cars = List.of(new CarModel(1, "Toyota", "green"),
-                new CarModel(2, "Lada", "black"),
-                new CarModel(3, "Opel", "yellow"),
-                new CarModel(4, "Nissan", "white"),
-                new CarModel(5, "Ferrari", "red")
-        );
-        if (count > 0 && count < 5) {
-            return cars.subList(0, count);
-        } else {
-            return cars;
-        }
+    public List<CarModel> getCars(int count) {
+        List<CarModel> allCars = daoCarList.getAllCars();
 
+        if (count <= 0) {
+            return Collections.emptyList(); // ничего не выводим
+        } else if (count < 5) {
+            return allCars.subList(0, count);
+        } else {
+            return allCars;
+        }
     }
 }
+

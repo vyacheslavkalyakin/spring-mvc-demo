@@ -9,8 +9,12 @@ import web.service.CarService;
 
 @Controller
 public class CarController {
+    private final CarService carService;
+
     @Autowired
-    private CarService carService;
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping(value = "/cars")
     public String printCars(@RequestParam(value = "count", required = false) Integer count, ModelMap model) {
