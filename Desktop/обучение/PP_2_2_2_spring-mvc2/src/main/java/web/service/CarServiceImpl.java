@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -19,13 +20,13 @@ public class CarServiceImpl implements CarService {
     public List<CarModel> getCars(int count) {
         List<CarModel> allCars = daoCarList.getAllCars();
 
-        if (count <= 0) {
-            return Collections.emptyList(); // ничего не выводим
-        } else if (count < 5) {
-            return allCars.subList(0, count);
-        } else {
-            return allCars;
-        }
+        return (count <= 0)
+                ? Collections.emptyList()
+                : (count < 5
+                ? allCars.stream()
+                .limit(count)
+                .collect(Collectors.toList())
+                : allCars);
     }
 }
 
